@@ -103,11 +103,11 @@ bool LinkedList<T>::removeBack()
 	Node<T>* secondintoLast = nullptr;
 	bool isRemoved = false;
 
-	/** TODO 
+	/** TODO
 		Fix this method
 	*/
 	Node<T>* m_ptrNext = m_front;
-	if(isEmpty())
+	if(m_front == nullptr)
     {
         return false;
     }
@@ -118,12 +118,20 @@ bool LinkedList<T>::removeBack()
         //shouldn't we have a m_back to set to nullprt?
         isRemoved = true;
     }
+    else if( m_size == 2)
+    {
+        lastNode = m_front->getNext();
+        delete lastNode;
+		lastNode = nullptr;
+		m_front->setNext(lastNode);
+		isRemoved = true;
+    }
     else
     {
         //m_ptrLast = m_ptrLast->m_ptrPrev;
         //delete m_ptrLast->m_ptrNext;
         //m_ptrLast->m_ptrNext = nullptr; This is how i would do it, trying to figure out this syntax
-        for( int i; i < (m_size - 2);i++)
+        for( int i = 0; i < (m_size - 2);i++)
         {
             m_ptrNext = m_ptrNext->getNext();
         }
@@ -135,7 +143,6 @@ bool LinkedList<T>::removeBack()
     }
 
     m_size--;
-
 	return(isRemoved);
 }	
 
