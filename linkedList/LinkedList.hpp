@@ -106,6 +106,35 @@ bool LinkedList<T>::removeBack()
 	/** TODO 
 		Fix this method
 	*/
+	Node<T>* m_ptrNext = m_front;
+	if(isEmpty())
+    {
+        return false;
+    }
+    else if(m_size == 1)
+    {
+        delete m_front;
+        m_front = nullptr;
+        //shouldn't we have a m_back to set to nullprt?
+        isRemoved = true;
+    }
+    else
+    {
+        //m_ptrLast = m_ptrLast->m_ptrPrev;
+        //delete m_ptrLast->m_ptrNext;
+        //m_ptrLast->m_ptrNext = nullptr; This is how i would do it, trying to figure out this syntax
+        for( int i; i < (m_size - 2);i++)
+        {
+            m_ptrNext = m_ptrNext->getNext();
+        }
+        secondintoLast = m_ptrNext;
+        delete lastNode;
+        lastNode = nullptr;
+        secondintoLast ->setNext(lastNode);
+        isRemoved = true;
+    }
+
+    m_size--;
 
 	return(isRemoved);
 }	
